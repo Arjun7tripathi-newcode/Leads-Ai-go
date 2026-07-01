@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   THEME TOKENS (Tailwind v4 @theme block)
+   Auto-generates utility classes from these
+   ============================================ */
+@theme {
+  --color-brand: #6366f1;
+  --color-brand-light: #818cf8;
+
+  --color-background: #FAFAFA;
+  --color-foreground: #111827;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #111827;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #111827;
+  --color-primary: #111827;
+  --color-primary-foreground: #f9fafb;
+  --color-secondary: #f3f4f6;
+  --color-secondary-foreground: #111827;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #f3f4f6;
+  --color-accent-foreground: #111827;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f9fafb;
+  --color-border: #E5E7EB;
+  --color-input: #e5e7eb;
+  --color-ring: #6366f1;
+
+  --radius-card: 20px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: rgba(0,0,0,0.08);
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0a0a0a;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   APPLE EASING UTILITY
+   ============================================ */
+.ease-apple {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================
+   MARQUEE ANIMATION (infinite logo scroll)
+   ============================================ */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  min-width: 100%;
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITY
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   PULSE DOT ANIMATION
+   ============================================ */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ============================================
+   SCROLLBAR HIDE
+   ============================================ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   EMAIL BODY RENDERER
+   ============================================ */
+.email-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #374151;
+  word-break: break-word;
+}
+.email-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.email-body a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+.email-body p {
+  margin: 0 0 12px;
+}
+.email-body table {
+  max-width: 100% !important;
+  border-collapse: collapse;
+}
+.email-body td, .email-body th {
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+}
+.email-body blockquote {
+  border-left: 3px solid #d1d5db;
+  margin: 8px 0;
+  padding: 8px 16px;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 0 8px 8px 0;
+}
+.email-body pre {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+/* ============================================
+   INBOX ANIMATIONS
+   ============================================ */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in {
+  animation: slideInRight 0.2s ease-out;
 }
